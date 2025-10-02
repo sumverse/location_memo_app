@@ -1,7 +1,6 @@
 //jquery는 js를 더 간단하게 사용할 수 있게 돕는 라이브러리
 
 let diaryItems = [];
-
 //1. 크롬스토리지에서 데이터 불러오는 함수 선언
 function getDiaryItems() {
   //1.크롬스토리지에서 데이터 가져오기
@@ -149,35 +148,49 @@ const options = {
   maximumAge: 0,
 };
 
-function success(pos) {
+async function success(pos) {
   var crd = pos.coords;
   let latitude = crd.latitude;
   let longitude = crd.longitude;
   let apikey = "f4e8ead9097b0c86b6b38e14d83dd550";
-  //fetch함수 : 날씨 데이터 불러오기
-  //promise(비동기방식) 반환
 
-  fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric&lang=kr`
-  )
-    .then((Response) => {
-      //console.log(Response);
-      //json을 js로 변환하기
-      return Response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      const weather = data.weather[0].description;
-      const icon = data.weather[0].icon;
-      const imageurl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
-      console.log(weather);
-      //Math.round() -> 소수점을 버리는 함수
-      const temp = Math.round(data.main.temp);
-      console.log(temp);
-      //html 클래스 부르기 $(".")
-      $(".weather").text(`${weather}${temp}℃`);
-      $(".weather-icon").attr("src", imageurl);
-    });
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric&lang=kr`
+    );
+    const data = await response.json();
+    const weather = data.weather[0].description;
+    const icon = data.weather[0].icon;
+    const imageurl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    console.log(weather);
+    //Math.round() -> 소수점을 버리는 함수
+    const temp = Math.round(data.main.temp);
+    console.log(temp);
+    //html 클래스 부르기 $(".")
+    $(".weather").text(`${weather}${temp}℃`);
+    $(".weather-icon").attr("src", imageurl);
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  // .then((Response) => {
+  //   //console.log(Response);
+  //   //json을 js로 변환하기
+  //   return Response.json();
+  // })
+  // .then((data) => {
+  //   console.log(data);
+  //   const weather = data.weather[0].description;
+  //   const icon = data.weather[0].icon;
+  //   const imageurl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  //   console.log(weather);
+  //   //Math.round() -> 소수점을 버리는 함수
+  //   const temp = Math.round(data.main.temp);
+  //   console.log(temp);
+  //   //html 클래스 부르기 $(".")
+  //   $(".weather").text(`${weather}${temp}℃`);
+  //   $(".weather-icon").attr("src", imageurl);
+  // });
 
   console.log("Your current position is:");
   console.log(`Latitude : ${crd.latitude}`);
