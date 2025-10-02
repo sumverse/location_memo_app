@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="jquery-3.7.1.js"></script>
+    <script src="dayjs.min.js"></script>
+  </head>
+  <body>
+    <div class="weather-app">
+      <header class="header">
+        <h1>한줄일기</h1>
+        <div>
+          <img class="weather-icon" src="" alt="" />
+          <!-- span태그는 의미없는 컨테이너 태그 : 텍스트의 일부를 적을 때-->
+          <span class="weather">흐림23C</span>
+        </div>
+      </header>
+      <main class="main-content">
+        <ul class="diary-list"></ul>
+      </main>
+      <button class="add-btn">+</button>
+      <!-- dialog :대화상자(dialog) 요소 / js에서  ocument.getElementById("modal") 식으로 불러서 사용
+       모달창으로 많이 사용-->
+      <dialog id="modal">
+        <!-- form을 쓰면 자동으로 저장하기를 눌렀을 때 모달창을 닫을 수 있음 -->
+        <form method="dialog">
+          <!-- textarea :여러 줄 입력이 가능한 텍스트 박스 -->
+          <textarea placeholder="오늘의 한 줄 일기를 기록하세요..."></textarea>
+          <button type="submit">저장</button>
+        </form>
+      </dialog>
+    </div>
+    <script src="content.js"></script>
+  </body>
+</html>

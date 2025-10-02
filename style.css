@@ -1,0 +1,169 @@
+/* 초기화상태 : 기본적으로 들어간 패딩과 마진 사이즈 줄이기*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 320px;
+  height: 480px;
+}
+
+.weather-app {
+  /* width, height를 100%로 채운다는 건 부모인 body의 사이즈에 딱 맞춘다는 말 */
+  width: 100%;
+  height: 100%;
+  background: white;
+  /* dispaly는 늘 flex로 맞추기 (flex로 해둬야 다른 기능들을 정확하게 사용할 수 있음)*/
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  /* space-between을 가장 많이 사용 */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  /* 그라데이션 효과 : 1.각도(어디까지 그라데이션을 줄것인지), 2.색상 */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  /* letter-spacing : 글자사이의 공간 줄이기 */
+}
+
+.header img {
+  width: 30px;
+  height: 30px;
+  /* opacity: 투명도 */
+  opacity: 0.8;
+}
+
+.header img:hover {
+  opacity: 1;
+}
+
+/* 메인화면 */
+.main-content {
+  padding: 16px;
+  flex: 1;
+}
+
+.main-content ul {
+  /* list만들면 나오는 점 없애기 */
+  list-style: none;
+  /* list 사이의 여백주기 */
+  gap: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content li {
+  /* 버튼 가로정렬 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.main-content p {
+  font-size: 14px;
+  color: #334155;
+  flex: 1;
+  line-height: 1.5;
+}
+.main-content button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.add-btn {
+  /* 절대좌표 -> 내가 위치 지정가능 */
+  /* 가장 기본적인 위치 : 왼쪽 위 */
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  /* radius는 %로 하면 원 */
+  border-radius: 50%;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  border: none;
+}
+dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  width: 300px;
+  /* min-width : 최대너비 1~100 중 선택 / vw : viewport width, 화면의 가로 너비 기준 상대 단위*/
+  min-width: 90vw;
+  background: white;
+  /* 스크롤여부 상관없이 자리고정 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /*  transform: 가운데정렬에 많이 사용, 주로 position: absolute; 또는 position: fixed; 와 함께 씀 */
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+dialog textarea {
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 14px;
+  font-family: inherit;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+dialog textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+dialog textarea::placeholder {
+  color: #94a3b8;
+}
+
+dialog button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
